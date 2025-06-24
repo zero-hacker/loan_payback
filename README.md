@@ -1,8 +1,10 @@
-## 🧠 Credit Default Prediction API (Classical ML - XGBoost + Flask)
+## Credit default prediction API (Classical ML - XGBoost + Flask)
 
-This project showcases a complete end-to-end classical machine learning pipeline that predicts whether a loan applicant is likely to default, using the **German Credit dataset**. It covers data preprocessing, model training, evaluation, pipeline export, and deployment via a RESTful Flask API. The deployed model is accessible publicly through a secured endpoint.
+This project showcases a complete end-to-end classical machine learning pipeline that predicts whether a loan applicant is likely to pay back or default (not pay back), using the **German Credit dataset**. 
 
----
+It covers **data preprocessing**, **model training**, **evaluation**, **pipeline export**, and **deployment via a RESTful Flask API**. The deployed model is accessible publicly through a secured endpoint.
+
+##
 
 ### Files
 
@@ -14,11 +16,11 @@ This project showcases a complete end-to-end classical machine learning pipeline
 | `app.py`                      | Flask API server code for model inference                  |
 | `README.md`                   | This file                                                  |
 
----
+##
 
-### Dataset: German Credit Data
+### Dataset
 
-The dataset includes customer financial attributes with the goal of predicting credit default risk.
+The dataset (German Credit Data) includes customer financial attributes to predict credit default risk.
 
 - **Size**: 1,000 records
 - **Features**: 20 features including:
@@ -29,12 +31,12 @@ The dataset includes customer financial attributes with the goal of predicting c
   - `savings`
   - `housing`
 - **Target Variable**: `credit_risk`
-  - `0`: Will pay back
-  - `1`: Likely to default
+  - `0`: Likely to pay back
+  - `1`: Likely to default (not pay back)
 
----
+##
 
-### Model Pipeline Design
+### Model pipeline design
 
 #### 1. Preprocessing
 
@@ -49,7 +51,7 @@ from sklearn.preprocessing import OneHotEncoder
 from xgboost import XGBClassifier
 ```
 
-#### 2. Handling Class Imbalance
+#### 2. Handling class imbalance
 
 - Found \~70:30 imbalance in class distribution
 - Used `scale_pos_weight` in XGBoost to counteract bias toward majority class
@@ -58,7 +60,7 @@ from xgboost import XGBClassifier
 model = XGBClassifier(scale_pos_weight=2.2)
 ```
 
-#### 3. Training & Evaluation
+#### 3. Training & evaluation
 
 - Evaluated using:
   - Accuracy
@@ -66,9 +68,9 @@ model = XGBClassifier(scale_pos_weight=2.2)
   - Cross-validation
 - Used stratified split for balanced testing
 
----
+##
 
-### Exporting the Model
+### Exporting the model
 
 The pipeline (preprocessing + XGBoost model) was exported as a `.pkl` file:
 
@@ -79,7 +81,7 @@ joblib.dump(pipeline, "credit_default_pipeline.pkl")
 
 This allows for reusability and deployment without retraining.
 
----
+##
 
 ### Running the Flask API
 
@@ -95,9 +97,9 @@ pip install flask pandas joblib scikit-learn xgboost
 python app.py
 ```
 
----
+##
 
-### Public API Usage Guide
+### Public API usage guide
 
 #### Endpoint
 
@@ -111,7 +113,7 @@ POST https://ai.kimjerry.com/predict
 application/json
 ```
 
-#### Sample single JSON payload
+#### (*Sample*) single JSON payload
 
 ```json
 {
@@ -170,9 +172,9 @@ application/json
 ]
 ```
 
----
+##
 
-Jerry Kim
+#### Jerry Kim
 
 - Repo: [https://github.com/zero-hacker/loan_payback](https://github.com/zero-hacker/loan_payback)
 - Hosted at: [https://ai.kimjerry.com/predict](https://ai.kimjerry.com/predict)
